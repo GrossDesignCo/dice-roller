@@ -1,0 +1,19 @@
+:root {
+  --foreground: #333;
+  --foreground-low: #777;
+  --foreground-destructive: #fff;
+
+  --background: #f8f8f8;
+  --background-low: #ccc;
+  --background-destructive: rgb(249, 49, 49);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground: #f8f8f8;
+    --foreground-low: #999;
+
+    --background: #333;
+    --background-low: #555;
+  }
+}

@@ -1,0 +1,63 @@
+:root {
+  --die-foreground: #fefefe;
+  --die-background: #444;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --die-foreground: #444;
+    --die-background: #fefefe;
+  }
+}
+
+.dice-group {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.dice-group-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.die-container {
+  display: flex;
+  align-items: start;
+  gap: 5px;
+}
+
+.dice {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.die {
+  border: none;
+  border-radius: 4px;
+  padding: 20px;
+  background-color: var(--die-background);
+  color: var(--die-foreground);
+  font-size: 24px;
+}
+
+.die.feaux {
+  background-color: transparent;
+  border: 2px dashed var(--foreground-low);
+  padding: 18px;
+}
+
+.actual-dice {
+  display: flex;
+  gap: 10px;
+}
+
+.dice-actions {
+  display: flex;
+  align-items: start;
+  gap: 10px;
+}

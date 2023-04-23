@@ -1,0 +1,13 @@
+.outer-layout {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+}
+
+.groups {
+  width: 100%;
+}
+
+.outer-actions {
+  padding: 20px;
+}
