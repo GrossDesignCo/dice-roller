@@ -47,6 +47,8 @@ export default function Home() {
           <Button onClick={add}>Add Group</Button>
         </div>
       </main>
+
+      <footer className={inter.className}>Other Presets</footer>
     </>
   );
 }

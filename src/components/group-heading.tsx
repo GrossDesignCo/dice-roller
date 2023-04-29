@@ -3,7 +3,7 @@ import cx from 'classnames';
 
 export const GroupHeading = () => {
   const [label, setLabel] = useState('');
-  const placeholder = 'Group Header';
+  const placeholder = 'Group Label';
 
   const [editing, setEditing] = useState(false);
   const ref = useRef<HTMLInputElement>(null);
@@ -21,7 +21,7 @@ export const GroupHeading = () => {
       placeholder={placeholder}
       onChange={(e) => setLabel(e.target.value)}
       onBlur={() => setEditing(false)}
-      className="group-header"
+      className="h4 group-header"
       onKeyDown={(e) => {
         if (e.key === 'Enter') {
           setEditing(false);
@@ -31,7 +31,9 @@ export const GroupHeading = () => {
   ) : (
     <h2
       onClick={() => setEditing(true)}
-      className={cx('group-header', { placeholder: !label })}
+      onFocus={() => setEditing(true)}
+      tabIndex={0}
+      className={cx('h4 group-header', { placeholder: !label })}
     >
       {label || placeholder}
     </h2>

@@ -38,6 +38,7 @@ export const Dice = () => {
                   <RemoveButton
                     className="remove-die"
                     onClick={() => removeDie(i)}
+                    title="Remove Die"
                   />
                 </div>
               );

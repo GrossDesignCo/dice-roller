@@ -11,7 +11,7 @@ export const DiceGroup = ({ onRemove }: DiceGroupProps) => {
     <section className="dice-group">
       <div className="dice-group-heading">
         <GroupHeading />
-        <RemoveButton onClick={() => onRemove()} />
+        <RemoveButton onClick={() => onRemove()} title="Remove Group" />
       </div>
 
       <Dice />
