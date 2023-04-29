@@ -57,7 +57,7 @@ export const Dice = () => {
         Add{' '}
         {typesArr.map((type) => {
           return (
-            <Button className="add" onClick={() => addDie(type)}>
+            <Button key={type} className="add" onClick={() => addDie(type)}>
               {type}
             </Button>
           );
