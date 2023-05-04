@@ -82,5 +82,5 @@ h4,
 
 .remove-button:hover {
   background: var(--background-destructive);
-  color: var(--foreground-destrucive);
+  color: var(--foreground-destructive);
 }

@@ -32,9 +32,9 @@
 
 .dice {
   display: flex;
-  justify-content: space-between;
-  align-items: start;
-  gap: 20px;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
 }
 
 .die {
@@ -50,13 +50,11 @@
   background-color: transparent;
   border: 2px dashed var(--foreground-low);
   padding: 18px;
+  aspect-ratio: 1/1;
 }
 
-.actual-dice {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 10px;
+.die.crit {
+  font-weight: 700;
 }
 
 .dice-actions {

@@ -1,8 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import cx from 'classnames';
 
-export const GroupHeading = () => {
-  const [label, setLabel] = useState('');
+export interface GroupHeadingProps {
+  label: string;
+  setLabel: (label: string) => void;
+}
+
+export const GroupHeading = ({ label, setLabel }: GroupHeadingProps) => {
   const placeholder = 'Group Label';
 
   const [editing, setEditing] = useState(false);
@@ -11,6 +15,7 @@ export const GroupHeading = () => {
   useEffect(() => {
     if (editing) {
       ref.current?.focus();
+      ref.current?.select();
     }
   }, [editing]);
 

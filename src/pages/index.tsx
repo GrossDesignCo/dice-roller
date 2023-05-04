@@ -1,30 +1,10 @@
 import Head from 'next/head';
 import { Inter } from 'next/font/google';
-import { DiceGroup } from '@/components/dice-group';
-import { useState } from 'react';
-import { Button } from '@/components/button';
-import { DieType } from '@/components/die';
+import { Main } from '@/components/main';
 
 const inter = Inter({ subsets: ['latin'] });
 
-type DiceGroup = {
-  id: number;
-  dice: DieType[];
-};
-
 export default function Home() {
-  const [diceGroups, setDiceGroups] = useState<DiceGroup[]>([
-    { id: Date.now(), dice: [] },
-  ]);
-
-  const add = () => {
-    setDiceGroups((prev) => [...prev, { id: Date.now(), dice: [] }]);
-  };
-
-  const remove = (id: number) => {
-    setDiceGroups((prev) => prev.filter((group) => group.id !== id));
-  };
-
   return (
     <>
       <Head>
@@ -35,17 +15,7 @@ export default function Home() {
       </Head>
 
       <main className={`${inter.className} outer-layout`}>
-        <div className="groups">
-          {diceGroups.map(({ id }) => (
-            <div key={id}>
-              <DiceGroup onRemove={() => remove(id)} />
-            </div>
-          ))}
-        </div>
-
-        <div className="outer-actions">
-          <Button onClick={add}>Add Group</Button>
-        </div>
+        <Main />
       </main>
 
       <footer className={inter.className}>Other Presets</footer>
