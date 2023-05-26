@@ -18,7 +18,9 @@ export default function Home() {
         <Main />
       </main>
 
-      <footer className={inter.className}>Other Presets</footer>
+      <footer className={inter.className}>
+        <h2>Other Presets</h2>
+      </footer>
     </>
   );
 }

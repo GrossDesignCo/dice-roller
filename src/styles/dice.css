@@ -22,6 +22,20 @@
   align-items: center;
   justify-content: space-between;
   gap: 10px;
+  padding: 10px 0;
+  padding-inline-end: 15px;
+}
+
+.dice-group-heading.highlight {
+  border-radius: 5px;
+  padding: 10px 15px;
+  box-shadow: 0 0 60px 0 var(--background-low);
+}
+
+.heading-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .die-container {
@@ -40,25 +54,46 @@
 .die {
   border: none;
   border-radius: 4px;
-  padding: 20px;
+  padding: 15px;
   background-color: var(--die-background);
   color: var(--die-foreground);
   font-size: 24px;
+  box-shadow: 0 0 0 0 var(--background), 0 0 0 0 var(--foreground-low);
+  transition: 0.25s ease;
+  min-width: 3em;
+  height: 100%;
+  aspect-ratio: 1/1;
+}
+
+.die:hover {
+  box-shadow: 0 0 0 2px var(--background), 0 0 0 3px var(--foreground-low);
 }
 
 .die.feaux {
   background-color: transparent;
   border: 2px dashed var(--foreground-low);
-  padding: 18px;
-  aspect-ratio: 1/1;
+  color: var(--foreground);
+  padding: 15px;
 }
 
-.die.crit {
+.die-value {
+  padding-bottom: 2px;
+}
+
+.die.crit .die-value {
   font-weight: 700;
 }
 
 .dice-actions {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 10px;
+}
+
+.die-type {
+  padding-top: 2px;
+  border-top: 1px solid var(--foreground-low);
+  color: var(--foreground-low);
+  font-size: 0.75em;
 }

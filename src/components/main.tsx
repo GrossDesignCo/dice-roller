@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Button } from '@/components/button';
 import { v4 as uuid } from 'uuid';
 import { DieType, dieTypes } from '@/components/die';
+import { rollDie } from '@/utils/roll-die';
 
 type DiceGroups = {
   [id: string]: DiceGroupData;
@@ -42,18 +43,18 @@ export const Main = () => {
 
       // Roll all the dice in this group
       Object.values(group.dice).forEach((die) => {
-        die.value = Math.floor(Math.random() * dieTypes[die.type]) + 1;
+        die.value = rollDie(die.type);
       });
 
       return newGroups;
     });
   };
 
-  const rollDie = (id: string, dieID: string) => {
+  const rollSingleDie = (id: string, dieID: string) => {
     setDiceGroups((prev) => {
       const newGroups = structuredClone(prev);
       const die = newGroups[id].dice[dieID];
-      die.value = Math.floor(Math.random() * dieTypes[die.type]) + 1;
+      die.value = rollDie(die.type);
 
       return newGroups;
     });
@@ -91,7 +92,7 @@ export const Main = () => {
               setLabel={(label) => setGroupLabel(id, label)}
               rollAllDice={() => rollAllDice(id)}
               addDie={(type) => addDie(id, type)}
-              rollDie={(dieID) => rollDie(id, dieID)}
+              rollDie={(dieID) => rollSingleDie(id, dieID)}
               removeDie={(dieID) => removeDie(id, dieID)}
             />
           </div>

@@ -1,9 +1,9 @@
 import { GroupHeading } from './group-heading';
 import { RemoveButton } from './remove-button';
 import { Button } from './button';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Die, DieProps, DieType, dieTypes } from './die';
-import { v4 as uuid } from 'uuid';
+import cx from 'classnames';
 import { AddDie } from './add-die';
 
 export interface DiceGroupData {
@@ -33,13 +33,63 @@ export const DiceGroup = ({
   removeDie,
 }: DiceGroupProps) => {
   const asArray = Object.entries(dice);
+  const headingRef = useRef<HTMLDivElement>(null);
+  const [addMode, setAddMode] = useState(false); // TODO: get out of add mode when user clicks away
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setAddMode(false);
+      }
+    };
+    const handleClickOut = (e: MouseEvent) => {
+      if (
+        headingRef.current &&
+        !headingRef.current.contains(e.target as HTMLElement)
+      ) {
+        setAddMode(false);
+      }
+    };
+
+    if (addMode) {
+      window.addEventListener('keydown', handleKeyDown);
+      window.addEventListener('click', handleClickOut);
+    }
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('click', handleClickOut);
+    };
+  }, [addMode]);
 
   return (
     <section className="dice-group">
-      <div className="dice-group-heading">
-        <GroupHeading label={label} setLabel={setLabel} />
+      <div className={cx('dice-group-heading', { highlight: addMode })}>
+        <div className="heading-content" ref={headingRef}>
+          {!addMode ? (
+            <>
+              <GroupHeading label={label} setLabel={setLabel} />
 
-        <AddDie addDie={addDie} />
+              <Button
+                className="add-dice"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setAddMode(true);
+                }}
+                title="Add Die"
+              >
+                +
+              </Button>
+            </>
+          ) : (
+            <>
+              <RemoveButton
+                onClick={() => setAddMode(false)}
+                title="JK, Don't add anything"
+              />
+              <AddDie addDie={addDie} />
+            </>
+          )}
+        </div>
 
         <RemoveButton onClick={() => removeGroup?.()} title="Remove Group" />
       </div>
@@ -66,7 +116,16 @@ export const DiceGroup = ({
             </Button>
           </>
         ) : (
-          <div className="die feaux">&nbsp;</div>
+          <button
+            className="die feaux"
+            onClick={(e) => {
+              e.stopPropagation();
+              setAddMode(true);
+            }}
+            title="Add Die"
+          >
+            +
+          </button>
         )}
       </div>
     </section>

@@ -1,5 +1,7 @@
 import { Ubuntu_Mono } from 'next/font/google';
 import cx from 'classnames';
+import { useEffect, useState } from 'react';
+import { rollDie } from '@/utils/roll-die';
 
 const mono = Ubuntu_Mono({ subsets: ['latin'], weight: ['400', '700'] });
 
@@ -21,12 +23,36 @@ export interface DieProps {
 }
 
 export const Die = ({ type, value = 1, roll }: DieProps) => {
+  const [displayValue, setDisplayValue] = useState(value);
+  const [firstRender, setFirstRender] = useState(true);
   const length = dieTypes[type].toString().length;
-  const paddedValue = value.toString().padStart(length, '_');
+  const paddedValue = displayValue.toString().padStart(length, '_');
+
+  useEffect(() => {
+    if (firstRender) {
+      setFirstRender(false);
+      return;
+    }
+
+    const interval = setInterval(() => {
+      setDisplayValue(() => rollDie(type));
+    }, 50);
+
+    const clear = () => {
+      clearInterval(interval);
+      setDisplayValue(value);
+    };
+
+    setTimeout(() => {
+      clear();
+    }, 500);
+
+    return clear;
+  }, [value, type, firstRender]);
 
   // Special styling for min/max vlaues
-  const crit = value === dieTypes[type];
-  const critFail = value === 1;
+  const crit = displayValue === dieTypes[type];
+  const critFail = displayValue === 1;
 
   return (
     <button
@@ -40,7 +66,8 @@ export const Die = ({ type, value = 1, roll }: DieProps) => {
       )}
       onClick={roll}
     >
-      {paddedValue}/{type}
+      <div className="die-value">{paddedValue}</div>
+      <div className="die-type">{type}</div>
     </button>
   );
 };
