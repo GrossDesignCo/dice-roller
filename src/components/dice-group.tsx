@@ -1,8 +1,8 @@
-import { GroupHeading } from './group-heading';
+import { EditableHeading } from './group-heading';
 import { RemoveButton } from './remove-button';
 import { Button } from './button';
 import { useEffect, useRef, useState } from 'react';
-import { Die, DieProps, DieType, dieTypes } from './die';
+import { Die, DieProps, DieType } from './die';
 import cx from 'classnames';
 import { AddDie } from './add-die';
 
@@ -67,7 +67,7 @@ export const DiceGroup = ({
         <div className="heading-content" ref={headingRef}>
           {!addMode ? (
             <>
-              <GroupHeading label={label} setLabel={setLabel} />
+              <EditableHeading label={label} setLabel={setLabel} />
 
               <Button
                 className="add-dice"

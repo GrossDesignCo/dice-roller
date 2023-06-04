@@ -58,7 +58,7 @@
   background-color: var(--die-background);
   color: var(--die-foreground);
   font-size: 24px;
-  box-shadow: 0 0 0 0 var(--background), 0 0 0 0 var(--foreground-low);
+  box-shadow: var(--focus-ring-off);
   transition: 0.25s ease;
   min-width: 3em;
   height: 100%;
@@ -66,7 +66,11 @@
 }
 
 .die:hover {
-  box-shadow: 0 0 0 2px var(--background), 0 0 0 3px var(--foreground-low);
+  box-shadow: var(--focus-ring), var(--afterglow);
+}
+
+.die:active {
+  box-shadow: var(--focus-ring-high);
 }
 
 .die.feaux {

@@ -1,14 +1,21 @@
 import { useEffect, useRef, useState } from 'react';
 import cx from 'classnames';
 
-export interface GroupHeadingProps {
+export interface EditableHeadingProps {
   label: string;
   setLabel: (label: string) => void;
+  placeholder?: string;
+  className?: string;
+  h?: '1' | '2' | '3' | '4' | '5' | '6';
 }
 
-export const GroupHeading = ({ label, setLabel }: GroupHeadingProps) => {
-  const placeholder = 'Group Label';
-
+export const EditableHeading = ({
+  label,
+  setLabel,
+  placeholder = 'New Group',
+  className,
+  h = '4',
+}: EditableHeadingProps) => {
   const [editing, setEditing] = useState(false);
   const ref = useRef<HTMLInputElement>(null);
 
@@ -26,7 +33,7 @@ export const GroupHeading = ({ label, setLabel }: GroupHeadingProps) => {
       placeholder={placeholder}
       onChange={(e) => setLabel(e.target.value)}
       onBlur={() => setEditing(false)}
-      className="h4 group-header"
+      className={cx('group-header', { [`h${h}`]: h }, className)}
       onKeyDown={(e) => {
         if (e.key === 'Enter') {
           setEditing(false);
@@ -38,7 +45,11 @@ export const GroupHeading = ({ label, setLabel }: GroupHeadingProps) => {
       onClick={() => setEditing(true)}
       onFocus={() => setEditing(true)}
       tabIndex={0}
-      className={cx('h4 group-header', { placeholder: !label })}
+      className={cx(
+        'group-header',
+        { placeholder: !label, [`h${h}`]: h },
+        className
+      )}
     >
       {label || placeholder}
     </h2>

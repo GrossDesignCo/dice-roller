@@ -1,8 +1,5 @@
 import Head from 'next/head';
-import { Inter } from 'next/font/google';
 import { Main } from '@/components/main';
-
-const inter = Inter({ subsets: ['latin'] });
 
 export default function Home() {
   return (
@@ -14,13 +11,7 @@ export default function Home() {
         <link rel="icon" type="image/png" href="/icon-192x192.png" />
       </Head>
 
-      <main className={`${inter.className} outer-layout`}>
-        <Main />
-      </main>
-
-      <footer className={inter.className}>
-        <h2>Other Presets</h2>
-      </footer>
+      <Main />
     </>
   );
 }

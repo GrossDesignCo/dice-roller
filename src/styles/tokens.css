@@ -6,6 +6,8 @@
   --background: #f8f8f8;
   --background-low: #ccc;
   --background-destructive: rgb(249, 49, 49);
+
+  --afterglow: 0 0 0 rgba(0, 0, 0, 0);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -15,5 +17,7 @@
 
     --background: #222;
     --background-low: #555;
+
+    --afterglow: 0 0 60px var(--background-low), 0 0 10px var(--foreground-low);
   }
 }
